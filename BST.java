@@ -4,8 +4,22 @@
 import java.util.LinkedList;
 import java.util.Random;
 
+/**
+ * BST PUBLIC CLASS
+ *
+ *
+ */
 public class BST<T extends Comparable<T>> {
   // PROTECTED CLASS
+  /**
+   * TreeNode PROTECTED INNER CLASS
+   *
+   * TreeNode CLASS IS RESPONSIBLE FOR STORING SEVERAL FIELDS:
+   *   (1) _height : THE HEIGHT OF THE TreeNode WITHIN THE TREE
+   *   (2) _value  : VALUE STORED IN TREE NODE
+   *   (3) _left   : LEFT CHILD TREE NODE
+   *   (4) _right  : RIGHT CHILD TREE NODE
+   */
   protected class TreeNode<T extends Comparable<T>>{
     // PRIVATE FIELDS
     private int _height = -1;
@@ -13,7 +27,14 @@ public class BST<T extends Comparable<T>> {
     private TreeNode<T> _left = null;
     private TreeNode<T> _right = null;
 
-    // CONSTRUCTOR
+    /**
+     * TreeNode CONSTRUCTOR
+     *
+     * @param input_value A GENERIC INPUT FROM THE USER
+     *
+     * THE CONSTRUCTOR WILL TAKE AN INPUT FROM USER AND STORE IT INTO A NEWLY
+     * CREATED TreeNode BEFORE RETURNING IT TO USER.
+     */
     public TreeNode(T input_value){
       _height = 1;
       _value = input_value;
@@ -22,61 +43,134 @@ public class BST<T extends Comparable<T>> {
     } // END CONSTRUCTOR
 
     // PUBLIC METHODS
+    /**
+     * append_right PUBLIC METHOD
+     *
+     * @param input_node A NEW NODE PROVIDED BY USER
+     *
+     * append_right METHOD WILL TAKE ONE INPUT (NEW NODE) AND APPEND IT AS THE
+     * RIGHT CHILD NODE
+     */
     public void append_right(TreeNode<T> input_node){
       this._right = input_node;
     } // END append_right
 
+    /**
+     * append_left PUBLIC METHOD
+     *
+     * @param input_node A NEW NODE PROVIDED BY USER
+     *
+     * append_left METHOD WILL TAKE ONE INPUT (NEW NODE) AND APPEND IT AS THE
+     * LEFT CHILD NODE
+     */
     public void append_left(TreeNode<T> input_node){
       this._left = input_node;
     } // END append_left
 
+    /**
+     * get_value PUBLIC METHOD
+     *
+     * @return T VALUE THAT STORED IN THE TREE NODE
+     *
+     * SIMPLE GETTER METHOD THAT WILL RETURN THE STORED VALUE UPON REQUESTS
+     */
     public T get_value(){
       return _value;
     } // END get_value
 
+    /**
+     * change_value PUBLIC METHOD
+     *
+     * @param new_value VALUE THAT PROVIDED BY USER WHICH WILL BE STORED INTO
+     *                  THE TREE NODE
+     *
+     * SIMPLE SETTER METHOD THAT MANIPULATES THE STORED VALUE OF A TREE NODE
+     */
     public void change_value(T new_value){
       this._value = new_value;
     } // END change_value
 
+    /**
+     * has_child PUBLIC METHOD
+     *
+     * @return A BOOLEAN VALUE - TRUE  : AT LEAST A CHILD NODE
+     *                           FALSE : NO CHILDREN NODE
+     *
+     * THIS METHOD WILL IDENTIFY THE EXISTENCE OF CHILD NODE(S)
+     */
     public boolean has_child(){
       return this._left != null || this._right != null;
     }
 
+    /**
+     * get_left, get_right, get_height PUBLIC METHODS
+     *
+     * SIMPLE GETTER METHOD THAT PROVIDES ACCESS TO THE STORED VALUE IN NODE
+     */
     public TreeNode<T> get_left(){
       return this._left;
     }
-
     public TreeNode<T> get_right(){
       return this._right;
     }
-
     public int get_height(){
       return _height;
     }
 
+    /**
+     * set_height PUBLIC METHOD
+     * @param input_value INPUT VALUE THAT PROVIDED BY USER
+     *
+     * TAKES A VALUE FROM USER AND STORE IT INTO THE TREE NODE
+     */
     public void set_height(int input_value){
       _height = input_value;
     }
   } // END TreeNode CLASS
 
-  // PRIVATE FIELDS
-  protected TreeNode<T> _head = null;
+  // PRIVATE FIELDS FOR BST CLASS
+  protected TreeNode<T> _head = null; // ROOT OF THE BST
   protected int _num_of_nodes = -1;
 
+  /**
+   * BST CONSTRUCTOR
+   *
+   * INITIALIZE BST OBJECT(S)
+   */
   public BST(){
     _head = null;
     _num_of_nodes = 0;
   }
 
+  /**
+   * OVERLOADED BST CONSTRUCTOR
+   *
+   * @param input_value USER PROVIDED INPUT VALUE
+   *
+   * OVERLOADED CONSTRUCTOR WILL TAKE AN INPUT VALUE AND INITIALIZE A TREE
+   * NODE OBJECT WITH THE INPUT VALUE
+   */
   public BST(T input_value){
     _head = new TreeNode<>(input_value);
     _num_of_nodes = 1;
   }
 
+  /**
+   * inorder_print PUBLIC METHOD
+   *
+   * PRINTING BST BY INORDER ORDER
+   */
   public void inorder_print(){
     _inorder(_head);
     _num_of_nodes++;
   }
+
+  /**
+   * _inorder PRIVATE METHOD
+   * @param root THE ROOT OF SUBT-TREE(S)
+   *
+   * PRINTING ENTIRE TREE BY THE INORDER ORDER
+   */
   private void _inorder(TreeNode<T> root){
     if(root != null){
       _inorder(root.get_left());
@@ -86,12 +180,13 @@ public class BST<T extends Comparable<T>> {
     System.out.println();
   }
 
+  /**
+   * print PUBLIC METHOD
+   *
+   * ITERATE THE ENTIRE TREE IN BREADTH FIRST ORDER AND CALLING A HELPER METHOD
+   * TO PRINT OUT THE INDENTATION
+   */
   public void print(){
-    // FORMAT STRINGS
-    int __spaces_lvl_0 = 39;
-    int __spaces_lvl_1 = 25;
-
-    //int __tree_depth = 0;
     int __print_count = 1;
     LinkedList<TreeNode<T>> __local_queue = new LinkedList<>();
     if(_head == null){
@@ -115,8 +210,18 @@ public class BST<T extends Comparable<T>> {
       // INCREMENT THE __print_count
       __print_count++;
     } // END WHILE LOOP
+    System.out.println();
   }
 
+  /**
+   * _print_tree_lines PRIVATE METHOD
+   * @param node_num INDICATES WHICH NODE NUMBER IS THE CURRENT NODE ( IN ORDER
+   *                 TO KNOW ITS EXACT POSITION )
+   * @param node     THE REFERENCE TO CURRENT NODE
+   *
+   * BASED ON THE POSITION OF THE CURRENT NODE, THE METHOD WILL PRINT OUT THE
+   * PROPER INDENTATION ( SPACING )
+   */
   private void _print_tree_lines(int node_num, TreeNode<T> node){
     /**
      * INDENTATION:
@@ -184,12 +289,33 @@ public class BST<T extends Comparable<T>> {
     }
   }
 
-
-
+  /**
+   * insert_node PUBLIC METHOD
+   *
+   * @param input_value THE VALUE THAT WILL STORES INTO NEW NODE
+   *
+   * THE insert_node METHOD WILL CALL A PRIVATE HELPER METHOD TO DO THE
+   * ACTUAL INSERTION WORK
+   */
   public void insert_node(T input_value){
+    if(input_value == null){
+      System.out.println("Input value can not be null.");
+      return;
+    }
     _head = _insert(_head, input_value);
   }
 
+  /**
+   * _insert PRIVATE METHOD
+   *
+   * @param root        INDICATES THE CURRENT ROOT NODE OF THE SUBTREE
+   * @param input_value THE VALUE THAT NEEDED TO BE ADDED
+   * @return            A REFERENCE TO THE CURRENT ROOT NODE
+   *
+   *
+   * THIS METHOD WILL RECURSIVELY FIND A CORRECT POSITION IN BST TO CREATE
+   * AND INSERT THE NEW NODE THAT CONTAINS THE USER INPUT VALUE
+   */
   protected TreeNode<T> _insert(TreeNode<T> root, T input_value){
     if(root == null){
       // ALLOCATE THE NEW NODE WHEN THE INSERT LOCATION IS FOUND
@@ -198,20 +324,46 @@ public class BST<T extends Comparable<T>> {
     else {
       if (root._value.compareTo(input_value) >= 0) {
         root.append_left(_insert(root.get_left(), input_value));
-      } else {
+      }
+      else {
         root.append_right(_insert(root.get_right(), input_value));
       }
     }
     return root;
   }
 
+  /**
+   * search_node PUBLIC METHOD
+   *
+   * @param input_value THE SEARCHING VALUE
+   * @return            BOOLEAN VALUE INDICATES NODE FOUND OR NOT FOUND
+   *
+   * THE search_node METHOD WILL ASK HELPS FROM A PRIVATE HELPER METHOD TO FIND
+   * THE SPECIFIC NODE
+   */
   public boolean search_node(T input_value) {
+    if(input_value == null){
+      System.out.println("Input value can not be null.");
+      return false;
+    }
     TreeNode<T> __node_ref = _find_node(this._head, input_value);
 
     return __node_ref != null;
   }
 
+  /**
+   * delete_node PUBLIC METHOD
+   *
+   * @param input_value INDICATES THE VALUE USER REQUESTS TO DELETE
+   *
+   * THE METHOD WILL CALL UP A PRIVATE HELPER METHOD (RECURSIVE METHOD) TO FIND
+   * THE RIGHT NODE TO BE DELETED
+   */
   public void delete_node(T input_value){
+    if(input_value == null){
+      System.out.println("Input value can not be null.");
+      return;
+    }
     if(_head == null){
       System.out.println("The BST is empty.");
       return;
@@ -226,19 +378,38 @@ public class BST<T extends Comparable<T>> {
       _head = _delete_node(_head, input_value);
     }
   }
+
+  /**
+   * _delete_node PROTECTED METHOD
+   *
+   * @param root        INDICATES THE CURRENT ROOT NODE OF SUBTREE
+   * @param input_value INDICATES THE VALUE NEEDED TO BE DELETED
+   * @return            A REFERENCE TO THE CURRENT ROOT NODE
+   *
+   * THE METHOD RECURSIVELY FINDS A CORRECT NODE TO DELETE AND IT WOULD
+   * SUBSTITUTE THE ROOT NODE (IF IT'S THE ONE TO BE DELETED) WITH THE GREATEST
+   * NODE IN LEFT SUBTREE.
+   */
   protected TreeNode<T> _delete_node(TreeNode<T> root, T input_value){
     if(root != null) {
       int __comparison_result = root.get_value().compareTo(input_value);
+      // TESTING
+      System.out.println(__comparison_result);
+
       if (__comparison_result > 0) {  // DELETE VALUE IS LESS
         root.append_left(_delete_node(root.get_left(), input_value));
-      } else if (__comparison_result < 0) { // DELETE VALUE IS GREATER
+      }
+      else if (__comparison_result < 0) { // DELETE VALUE IS GREATER
         root.append_right(_delete_node(root.get_right(), input_value));
-      } else { // FOUND
+      }
+      else { // FOUND
         if (root.get_left() == null) {
           return root.get_right();
-        } else if (root.get_right() == null) {
+        }
+        else if (root.get_right() == null) {
           return root.get_left();
-        } else { // HAS TWO CHILDREN
+        }
+        else { // HAS TWO CHILDREN
           // COPY VALUE
           root.change_value(_get_max_node(root.get_left()).get_value());
           root.append_left(_delete_node(root.get_left(), root.get_value()));
@@ -248,13 +419,30 @@ public class BST<T extends Comparable<T>> {
     return root;
   }
 
+  /**
+   * _get_max_node PROTECTED METHOD
+   *
+   * @param node INDICATES THE ROOT NODE OF THE CURRENT SUBTREE
+   * @return     THE REFERENCE TO THE GREATEST CHILD NODE IN THIS SUBTREE
+   *
+   * SIMPLY USING A LOOP TO FIND THE RIGHT-MOST NODE IN LEFT SUBTREE AND
+   * RETURN A REFERENCE TO IT
+   */
   protected TreeNode<T> _get_max_node(TreeNode<T> node){
     while(node.get_right() != null){
-      node = node.get_left();
+      //node = node.get_left(); <------------- CAUSING PROBLEM
+      node = node.get_right();
     } // END WHILE
     return node;
   }
 
+  /**
+   * _find_node PRIVATE METHOD
+   *
+   * @param root        THE ROOT NODE OF THE CURRENT SUBTREE
+   * @param input_value INDICATES THE SEARCHING VALUE
+   * @return            A REFERENCE TO THE TARGET NODE; RETURN NULL IF NOT FOUND
+   */
   private TreeNode<T> _find_node(TreeNode<T> root, T input_value){
     if(root == null){
       // NOT FOUND
@@ -271,26 +459,5 @@ public class BST<T extends Comparable<T>> {
     else{
       return _find_node(root._right, input_value);
     }
-
   }
 }
-
-/**
-                                    91
-                                    /\
-                      --------------   --------------
-                     /                               \
-                    55                               94
-                    /\                               /\
-             ------   ------                  ------   ------
-            /               \                /               \
-           30               70              85               97
-           /\               /\              /\               /\
-        --   --          --   --         --   --          --   --
-       /       \        /       \       /       \        /       \
-      10       50      60       80     84       87      95       98
-      /\       /\      /\       /\     /\       /\      /\       /\
-     -  -     -  -    -  -     -  -   -  -     -  -    -  -     -  -
-    /    \   /    \  /    \   /    \ /    \   /    \  /    \   /    \
-   2     11 44    52
- */
