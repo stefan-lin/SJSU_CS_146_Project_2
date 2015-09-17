@@ -232,8 +232,10 @@ public class BST<T extends Comparable<T>> {
      *   (5) LEVEL 5 = 2^(5-5) - 1 = 0
       */
     // PRINT OUT THE INTERNAL LINES INSIDE THE TREE
+    boolean _new_line_flag = false;
     int __indent = 0;
     if(node_num == 1 || node_num ==3){
+      _new_line_flag = true;
       if(node_num == 1){
         __indent = 15+2;
       }
@@ -242,6 +244,9 @@ public class BST<T extends Comparable<T>> {
       }
     }
     else if(node_num == 2 || node_num>=5 && node_num<=7){
+      if(node_num == 7){
+        _new_line_flag = true;
+      }
       if(node_num == 2){
         __indent = 7+2;
       }
@@ -250,6 +255,9 @@ public class BST<T extends Comparable<T>> {
       }
     }
     else if(node_num == 4 || node_num>=9 && node_num<=15){
+      if(node_num == 15){
+        _new_line_flag = true;
+      }
       if(node_num ==4){
         __indent = 3+2;
       }
@@ -258,6 +266,9 @@ public class BST<T extends Comparable<T>> {
       }
     }
     else if(node_num == 8 || node_num>=17 && node_num<=31) {
+      if(node_num == 31){
+        _new_line_flag = true;
+      }
       if(node_num == 8){
         __indent = 1+2;
       }
@@ -278,6 +289,12 @@ public class BST<T extends Comparable<T>> {
     }
     if(node != null) {
       System.out.print(node.get_value());
+      // testing /////////////////////////////////////////////////////////////
+      System.out.print(" = ");
+      System.out.print(node.get_height());
+      if(_new_line_flag){
+        System.out.println();
+      }
     }
     else{
       System.out.print("X");
@@ -328,6 +345,10 @@ public class BST<T extends Comparable<T>> {
       else {
         root.append_right(_insert(root.get_right(), input_value));
       }
+      // UPDATING HEIGHT OF THE NODE
+      root.set_height(Math.max(
+          _get_height(root.get_left()), _get_height(root.get_right())
+      ) + 1);
     }
     return root;
   }
@@ -459,5 +480,36 @@ public class BST<T extends Comparable<T>> {
     else{
       return _find_node(root._right, input_value);
     }
+  }
+
+  /**
+   *
+   * @param node
+   * @return
+   */
+  protected int _get_height(TreeNode<T> node){
+    return (node == null) ? 0 : node.get_height();
+  }
+
+  public boolean is_height_five(){
+    if(_head == null){
+      return false;
+    }
+    return _head.get_height() == 5;
+  }
+
+  public boolean is_empty(){
+    return _head == null;
+  }
+
+  public T get_first_value(){
+    return _head.get_value();
+  }
+
+  public T pop(){
+    TreeNode<T> __deleted_root = _head;
+    this.delete_node(__deleted_root.get_value());
+    _num_of_nodes--;
+    return __deleted_root.get_value();
   }
 }

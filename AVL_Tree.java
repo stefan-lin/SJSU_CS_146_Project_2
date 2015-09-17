@@ -13,6 +13,7 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
   }
 
   public TreeNode<T> right_rotate(TreeNode<T> root){
+    System.out.println("Right rotation on : " + root.get_value());
     TreeNode<T> __left_child = root.get_left();
     TreeNode<T> __left_child_right_sub_tree = __left_child.get_right();
 
@@ -34,6 +35,7 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
   }
 
   public TreeNode<T> left_rotate(TreeNode<T> root) {
+    System.out.println("Left rotation on : " + root.get_value());
     TreeNode<T> __right_child = root.get_right();
     TreeNode<T> __right_child_left_sub_tree = __right_child.get_left();
 
@@ -60,9 +62,6 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     }
     return _get_height(root.get_left()) - _get_height(root.get_right());
   }
-  private int _get_height(TreeNode<T> node){
-    return (node == null) ? 0 : node.get_height();
-  }
 
   private TreeNode<T> _balance_tree(TreeNode<T> root, T input_value){
     // UPDATING HEIGHT OF THE NODE
@@ -76,10 +75,12 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     if(__height_difference > 1){
       // LEFT LEFT
       if(input_value.compareTo(root.get_left().get_value()) < 0){
+        System.out.println("Left-Left case : " + root.get_value());
         // INPUT VALUE IS LESS THAN THE VALUE STORES IN LEFT CHILD
         return right_rotate(root);
       }
       else{ // LEFT RIGHT : INPUT VALUE > LEFT CHILD VALUE
+        System.out.println("Left-Right case : " + root.get_value());
         root.append_left(left_rotate(root.get_left()));
         return right_rotate(root);
       }
@@ -87,9 +88,11 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     if(__height_difference < -1){
       // RIGHT RIGHT
       if(input_value.compareTo(root.get_right().get_value()) > 0){
+        System.out.println("Right-Right case : " + root.get_value());
         return left_rotate(root);
       }
       else{ // RIGHT LEFT
+        System.out.println("Right-Left case : " + root.get_value());
         root.append_right(right_rotate(root.get_right()));
         return left_rotate(root);
       }
