@@ -11,8 +11,8 @@ public class Tree_Demo {
   final int RAND_MIN = 10;
   final int RAND_MAX = 99;
   final int NUM_AVL_NODES = 35;
-  final int INT_ARR_SIZE = 100;
-  final int RAND_ARR = 50;
+  final int INT_ARR_SIZE = 100000;
+  final int RAND_ARR = 10000;
   public void bst_demo_method(){
     BST<Integer> __bst = new BST<>();
     Random __rand_gen = new Random();
@@ -24,12 +24,12 @@ public class Tree_Demo {
     // PRINT AND DELETE ROOT REPEATLY
     System.out.println("INITIAL TREE : ");
     System.out.println("= = = = = = = = = = = = = = = = = = = = = ");
-    __bst.print();
+    (new TreePrinter<>(__bst)).print("");
     System.out.println("------------------------------------------\n");
     while(!__bst.is_empty()){
       System.out.println("= = = = = = = = = = = = = = = = = = = = = ");
       System.out.println("DELETING " + __bst.pop() + " : ");
-      __bst.print();
+      (new TreePrinter<>(__bst)).print("");
       System.out.println("------------------------------------------\n");
     }
 
@@ -45,12 +45,12 @@ public class Tree_Demo {
     } // END FOR LOOP
     System.out.println("INITIAL TREE : ");
     System.out.println("= = = = = = = = = = = = = = = = = = = = = ");
-    __avl.print();
+    (new TreePrinter<>(__avl)).print("");
     System.out.println("------------------------------------------\n");
     while(!__avl.is_empty()){
       System.out.println("= = = = = = = = = = = = = = = = = = = = = ");
       System.out.println("DELETING " + __avl.pop() + " : ");
-      __avl.print();
+      (new TreePrinter<>(__avl)).print("");
       System.out.println("------------------------------------------\n");
     } // END WHILE LOOP
 
@@ -91,10 +91,17 @@ public class Tree_Demo {
     //NOT SURE IF WE CAN USE THIS BUT : TimeUnit.NANOSECONDS.toSeconds(1000000000000L);
     System.out.println(
         "Inserting 100k nodes into BST took " +
-            (double)__elapsed_time_bst/1000000000.0 + "nanoseconds");
+<<<<<<< HEAD
+            __elapsed_time_bst + "nanoseconds");
     System.out.println(
         "Inserting 100k nodes into AVL took " +
-            (double)__elapsed_time_avl/1000000000.0;  + "nanoseconds");
+            __elapsed_time_avl + "nanoseconds");
+=======
+            __elapsed_time_bst + " nanoseconds");
+    System.out.println(
+        "Inserting 100k nodes into AVL took " +
+            __elapsed_time_avl + " nanoseconds");
+>>>>>>> origin/Sep13
 
     /////////////////// SEARCH ////////////////////////////////////////////////
     long __bst_search = -1;
@@ -114,10 +121,17 @@ public class Tree_Demo {
 
     System.out.println(
         "Searching 10k nodes in BST with 100k nodes took " +
-           (double) __bst_search/1000000000.0; + "nanoseconds");
+<<<<<<< HEAD
+            __bst_search + "nanoseconds");
     System.out.println(
         "Searching 10k nodes in AVL with 100k nodes took " +
-            (double)__avl_search/1000000000.0; + "nanoseconds");
+            __avl_search + "nanoseconds");
+=======
+            __bst_search + " nanoseconds");
+    System.out.println(
+        "Searching 10k nodes in AVL with 100k nodes took " +
+            __avl_search + " nanoseconds");
+>>>>>>> origin/Sep13
 
     /////////////////// INSERT + SEARCH ///////////////////////////////////////
     // USING THE RANDOM GENERATED SEARCHING NUMBER TO EITHER INSERTING OR
@@ -149,14 +163,58 @@ public class Tree_Demo {
 
     System.out.println(
         "Searching or inserting 10k nodes in BST with 100k nodes took " +
-            (double)__bst_mix/1000000000.0; + "nanoseconds");
+<<<<<<< HEAD
+            __bst_mix + "nanoseconds");
     System.out.println(
         "Searching or inserting 10k nodes in AVL with 100k nodes took " +
-           (double) __avl_mix/1000000000.0; + "nanoseconds");
+            __avl_mix + "nanoseconds");
+=======
+            __bst_mix + " nanoseconds");
+    System.out.println(
+        "Searching or inserting 10k nodes in AVL with 100k nodes took " +
+            __avl_mix + " nanoseconds");
+>>>>>>> origin/Sep13
   }
 
   public static void main(String[] args) {
     Tree_Demo __demo = new Tree_Demo();
-    __demo.efficiency_test();
+    try {
+      __demo.bst_demo_method();
+      System.in.read();
+      __demo.avl_demo_method();
+      System.in.read();
+      __demo.efficiency_test();
+    }
+    catch(Exception e){
+
+    }
+
+    //AVL_Tree<Integer> __avl = new AVL_Tree<>();
+    //Random __rand_gen = new Random();
+    //ArrayList<Integer> __arr = new ArrayList<>(50);
+    //
+    //for(int i =0; i<50; i++){
+    //  __arr.add(i, __rand_gen.nextInt(99-10)+10);
+    //}
+    //
+    //for(int j=0; j<50; j++){
+    //  System.out.print(__arr.get(j) + ", ");
+    //  if(j%10 == 0){
+    //    System.out.println();
+    //  }
+    //}
+    //
+    //for(int i=0; i<50; i++){
+    //  System.out.println("[ " + i + " ] = { " + __arr.get(i) + " }");
+    //  __avl.insert_node(__arr.get(i));
+    //  //__avl.print();
+    //  //TreePrinter<Integer> __tp = new TreePrinter<>(__avl);
+    //  //__tp.print("Test");
+    //  System.out.println();
+    //  try {
+    //    System.in.read();
+    //  }
+    //  catch (Exception e){}
+    //}
   }
 }
