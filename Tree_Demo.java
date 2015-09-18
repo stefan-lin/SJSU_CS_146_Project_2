@@ -87,13 +87,14 @@ public class Tree_Demo {
       __avl.insert_node(__int_arr.get(itr));
     } // END FOR LOOP
     __elapsed_time_avl = System.nanoTime() - __begin;
-
+      
+    //NOT SURE IF WE CAN USE THIS BUT : TimeUnit.NANOSECONDS.toSeconds(1000000000000L);
     System.out.println(
         "Inserting 100k nodes into BST took " +
-            __elapsed_time_bst + "nanoseconds");
+            (double)__elapsed_time_bst/1000000000.0 + "nanoseconds");
     System.out.println(
         "Inserting 100k nodes into AVL took " +
-            __elapsed_time_avl + "nanoseconds");
+            (double)__elapsed_time_avl/1000000000.0;  + "nanoseconds");
 
     /////////////////// SEARCH ////////////////////////////////////////////////
     long __bst_search = -1;
@@ -113,10 +114,10 @@ public class Tree_Demo {
 
     System.out.println(
         "Searching 10k nodes in BST with 100k nodes took " +
-            __bst_search + "nanoseconds");
+           (double) __bst_search/1000000000.0; + "nanoseconds");
     System.out.println(
         "Searching 10k nodes in AVL with 100k nodes took " +
-            __avl_search + "nanoseconds");
+            (double)__avl_search/1000000000.0; + "nanoseconds");
 
     /////////////////// INSERT + SEARCH ///////////////////////////////////////
     // USING THE RANDOM GENERATED SEARCHING NUMBER TO EITHER INSERTING OR
@@ -148,10 +149,10 @@ public class Tree_Demo {
 
     System.out.println(
         "Searching or inserting 10k nodes in BST with 100k nodes took " +
-            __bst_mix + "nanoseconds");
+            (double)__bst_mix/1000000000.0; + "nanoseconds");
     System.out.println(
         "Searching or inserting 10k nodes in AVL with 100k nodes took " +
-            __avl_mix + "nanoseconds");
+           (double) __avl_mix/1000000000.0; + "nanoseconds");
   }
 
   public static void main(String[] args) {
