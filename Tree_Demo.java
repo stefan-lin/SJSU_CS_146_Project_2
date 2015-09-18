@@ -92,15 +92,15 @@ public class Tree_Demo {
     System.out.println(
         "Inserting 100k nodes into BST took " +
 <<<<<<< HEAD
-            __elapsed_time_bst + "nanoseconds");
+            (double)__elapsed_time_bst/1000000000000.0 + "seconds");
     System.out.println(
         "Inserting 100k nodes into AVL took " +
-            __elapsed_time_avl + "nanoseconds");
+            (double)__elapsed_time_avl/1000000000000.0  + "seconds");
 =======
-            __elapsed_time_bst + " nanoseconds");
+            (double)__elapsed_time_bst/1000000000000.0  + "seconds");
     System.out.println(
         "Inserting 100k nodes into AVL took " +
-            __elapsed_time_avl + " nanoseconds");
+            (double)__elapsed_time_avl/1000000000000.0  + "seconds");
 >>>>>>> origin/Sep13
 
     /////////////////// SEARCH ////////////////////////////////////////////////
@@ -122,15 +122,15 @@ public class Tree_Demo {
     System.out.println(
         "Searching 10k nodes in BST with 100k nodes took " +
 <<<<<<< HEAD
-            __bst_search + "nanoseconds");
+           (double) __bst_search/1000000000000.0  + "seconds");
     System.out.println(
         "Searching 10k nodes in AVL with 100k nodes took " +
-            __avl_search + "nanoseconds");
+            (double)__avl_search/1000000000000.0  + "seconds");
 =======
-            __bst_search + " nanoseconds");
+           (double) __bst_search + "seconds");
     System.out.println(
         "Searching 10k nodes in AVL with 100k nodes took " +
-            __avl_search + " nanoseconds");
+            (double)__avl_search/1000000000000.0  + "seconds");
 >>>>>>> origin/Sep13
 
     /////////////////// INSERT + SEARCH ///////////////////////////////////////
@@ -164,15 +164,15 @@ public class Tree_Demo {
     System.out.println(
         "Searching or inserting 10k nodes in BST with 100k nodes took " +
 <<<<<<< HEAD
-            __bst_mix + "nanoseconds");
+           (double) __bst_mix/1000000000000.0  + "nanoseconds");
     System.out.println(
         "Searching or inserting 10k nodes in AVL with 100k nodes took " +
-            __avl_mix + "nanoseconds");
+            (double)__avl_mix/1000000000000.0  + "nanoseconds");
 =======
-            __bst_mix + " nanoseconds");
+           (double) __bst_mix/1000000000000.0  + " nanoseconds");
     System.out.println(
         "Searching or inserting 10k nodes in AVL with 100k nodes took " +
-            __avl_mix + " nanoseconds");
+           (double) __avl_mix/1000000000000.0  + " nanoseconds");
 >>>>>>> origin/Sep13
   }
 
