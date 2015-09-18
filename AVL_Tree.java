@@ -12,10 +12,10 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     _num_of_nodes = 0;
   }
 
-  public TreeNode<T> right_rotate(TreeNode<T> root){
-    System.out.println("Right rotation on : " + root.get_value());
-    TreeNode<T> __left_child = root.get_left();
-    TreeNode<T> __left_child_right_sub_tree = __left_child.get_right();
+  public BinaryNode<T> right_rotate(BinaryNode<T> root){
+    //System.out.println("Right rotation on : " + root.get_value());
+    BinaryNode<T> __left_child = root.get_left();
+    BinaryNode<T> __left_child_right_sub_tree = __left_child.get_right();
 
     // ROTATION
     __left_child.append_right(root);
@@ -34,10 +34,10 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     return __left_child;  // RETURNING NEW ROOT
   }
 
-  public TreeNode<T> left_rotate(TreeNode<T> root) {
-    System.out.println("Left rotation on : " + root.get_value());
-    TreeNode<T> __right_child = root.get_right();
-    TreeNode<T> __right_child_left_sub_tree = __right_child.get_left();
+  public BinaryNode<T> left_rotate(BinaryNode<T> root) {
+    //System.out.println("Left rotation on : " + root.get_value());
+    BinaryNode<T> __right_child = root.get_right();
+    BinaryNode<T> __right_child_left_sub_tree = __right_child.get_left();
 
     // ROTATION
     __right_child.append_left(root);
@@ -56,43 +56,43 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
     return __right_child;  // RETURNING NEW ROOT
   }
 
-  int get_height_difference(TreeNode<T> root){
+  int get_height_difference(BinaryNode<T> root){
     if(root == null){
       return 0;
     }
     return _get_height(root.get_left()) - _get_height(root.get_right());
   }
 
-  private TreeNode<T> _balance_tree(TreeNode<T> root, T input_value){
+  private BinaryNode<T> _balance_tree(BinaryNode<T> root, T input_value){
     // UPDATING HEIGHT OF THE NODE
     root.set_height(Math.max(
         _get_height(root.get_left()), _get_height(root.get_right())
     ) + 1);
 
     int __height_difference = get_height_difference(root);
-
+    //System.out.println("Height Difference : [" + __height_difference + "]");
     // DETEREMINE IF ROTATION(S) IS/ARE NEEDED
     if(__height_difference > 1){
       // LEFT LEFT
-      if(input_value.compareTo(root.get_left().get_value()) < 0){
-        System.out.println("Left-Left case : " + root.get_value());
+      if(input_value.compareTo(root.get_left().get_value()) <= 0){
+        //System.out.println("Left-Left case : " + root.get_value());
         // INPUT VALUE IS LESS THAN THE VALUE STORES IN LEFT CHILD
         return right_rotate(root);
       }
       else{ // LEFT RIGHT : INPUT VALUE > LEFT CHILD VALUE
-        System.out.println("Left-Right case : " + root.get_value());
+        //System.out.println("Left-Right case : " + root.get_value());
         root.append_left(left_rotate(root.get_left()));
         return right_rotate(root);
       }
     }
     if(__height_difference < -1){
       // RIGHT RIGHT
-      if(input_value.compareTo(root.get_right().get_value()) > 0){
-        System.out.println("Right-Right case : " + root.get_value());
+      if(input_value.compareTo(root.get_right().get_value()) >= 0){
+        //System.out.println("Right-Right case : " + root.get_value());
         return left_rotate(root);
       }
       else{ // RIGHT LEFT
-        System.out.println("Right-Left case : " + root.get_value());
+        //System.out.println("Right-Left case : " + root.get_value());
         root.append_right(right_rotate(root.get_right()));
         return left_rotate(root);
       }
@@ -101,9 +101,9 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
   }
 
   @Override
-  protected TreeNode<T> _insert(TreeNode<T> root, T input_value){
+  protected BinaryNode<T> _insert(BinaryNode<T> root, T input_value){
     if(root == null){
-      root = new TreeNode<>(input_value);
+      root = new BinaryNode<>(input_value);
     }
     else{
       if (root.get_value().compareTo(input_value) >= 0) {
@@ -118,7 +118,7 @@ public class AVL_Tree<T extends Comparable<T>> extends BST<T> {
   } // END _insert PRIVATE METHOD
 
   @Override
-  protected TreeNode<T> _delete_node(TreeNode<T> root, T input_value){
+  protected BinaryNode<T> _delete_node(BinaryNode<T> root, T input_value){
     if(root != null) {
       int __comparison_result = root.get_value().compareTo(input_value);
       if (__comparison_result > 0) {  // DELETE VALUE IS LESS
